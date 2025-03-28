@@ -48,7 +48,8 @@ public class ChatWindowController implements Initializable {
                     while(true) {
                         synchronized (objectInputStream) {
                             if(objectInputStream.readObject() != null) {
-                                messageTextArea.appendText(user.getUsername() + ": " + (String) objectInputStream.readObject());
+                                System.out.println(objectInputStream.readObject());
+                                //messageTextArea.appendText(user.getUsername() + ": " + (String) objectInputStream.readObject());
                             }
                         }
                     }
