@@ -45,7 +45,9 @@ public class ClientHandler extends Thread{
     }
 
     private void broadcastMessage(String message) throws IOException {
-        objectOutputStream.writeObject(message);
+        synchronized (objectOutputStream) {
+            objectOutputStream.writeObject(message);
+        }
     }
 
     private String receiveMessage() throws IOException, ClassNotFoundException {

@@ -63,8 +63,12 @@ public class ChatWindowController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         socket = LoginWindowController.getSocket();
-        objectOutputStream = LoginWindowController.getObjectOutputStream();
-        objectInputStream = LoginWindowController.getObjectInputStream();
+        try {
+            objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+            objectInputStream = new ObjectInputStream(socket.getInputStream());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         user = LoginWindowController.getUser();
         usernameLabel.setText(user.getUsername());
         receiveMessage();
